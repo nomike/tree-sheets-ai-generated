@@ -1,1 +1,6 @@
 docopt
+google-genai
+jinja2
+pillow
+requests
+selenium
