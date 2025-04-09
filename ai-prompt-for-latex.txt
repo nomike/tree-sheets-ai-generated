@@ -1,0 +1,11 @@
+I need a latex template for my document and have the following requirements:
+
+- The document should be in A4 format.
+- On the top left corner of the page should be a square with no or white background and a 1 mm black border.
+- On the top of the page, at the sime height as the square, should be a row of images. These are stored as "a.png", "b.png", "c.png" and "d.png", all of which are 2x2cm in size.
+- Bellow that, there should be a horizontally centered title reading "English Name".
+- Bellow that, there should be a horizontally centered sub title reading "Botanical Name".
+- Bellow that, there should be a horizontally centered large image (tree.png).
+- Bellow that, there should be a justified text block, spanning the width of the page with one pararaph of lorem ipsum text.
+
+A second identical page should be added below.
