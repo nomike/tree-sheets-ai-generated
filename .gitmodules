@@ -1,0 +1,3 @@
+[submodule "google_image_scraper"]
+	path = google_image_scraper
+	url = https://github.com/ohyicong/Google-Image-Scraper
