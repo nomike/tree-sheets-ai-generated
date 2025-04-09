@@ -13,6 +13,30 @@ Options:
 import csv
 import docopt
 
+from google import genai
+from google.genai import types
+
+# Only run this block for Gemini Developer API
+client = genai.Client(api_key='AIzaSyBEqi4Gn6T0Ktq2560uG_hTEaseBNIt_AA')
+
+def has_medicinal_value(botanical_name):
+    return client.models.generate_content(
+        model='gemini-2.0-flash-001', contents=f'Does {botanical_name} have medicinal value? Answer y or n only.'
+    ).text.strip()
+
+def has_special_wood(botanical_name):
+    return client.models.generate_content(
+        model='gemini-2.0-flash-001', contents=f'Does {botanical_name} have wood which is useful for construction, furniture, etc.? Answer y or n only.'
+    ).text.strip()
+
+
+def generate_descriptipn(botanical_name):
+    return client.models.generate_content(
+        model='gemini-2.0-flash-001', contents=f'Write a short one-paragraph description of {botanical_name}.'
+    ).text.strip()
+
+
+
 def load_tree_list(path):
     tree_list = []
     with open(path, mode='r', encoding='utf-8') as csvfile:
@@ -21,9 +45,25 @@ def load_tree_list(path):
             tree_list.append(row)
     return tree_list
 
+def save_tree_list(tree_list, path):
+    with open(path, mode='w', encoding='utf-8') as csvfile:
+        writer = csv.DictWriter(csvfile, fieldnames=tree_list[0].keys())
+        writer.writeheader()
+        for row in tree_list:
+            writer.writerow(row)
+
 if __name__ == '__main__':
     args = docopt.docopt(__doc__, version='0.1.0')
     tree_list = load_tree_list(args['<path>'])
-    for tree in [t for t in tree_list if len(t['Botanical name']) == 0]:
-        print(tree['Name'])
+    try:
+        for tree in [t for t in tree_list if len(t['Description']) == 0]:
+            print(f"ID: {tree['ID']} Name: {tree['Name']} Botanical name: {tree['Botanical name']}")
+            # print(f"\tHas medicinal value? {has_medicinal_value(tree['Botanical name'])}")
+            # print(f"\tHas special wood? {has_special_wood(tree['Botanical name'])}")
+            tree['Description'] = generate_descriptipn(tree['Botanical name'])
+            print(tree['Description'])
+    except:
+        print("Error: API call failed.")
+    save_tree_list(tree_list, args['<path>'])
+
     
