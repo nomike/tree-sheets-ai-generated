@@ -4,16 +4,89 @@
     \usepackage{geometry}
     \usepackage{float}
     \usepackage{ragged2e}
+    \usepackage{scrextend}
     \geometry{
         a4paper,
         margin=1in,
     }
 
     \usepackage{tikz}
+    \usepackage{multicol}
+    \usepackage{tocloft}
+
+    % Remove page numbers from TOC
+    \cftpagenumbersoff{section}
 
     \begin{document}
 
+    % Remove page numbers from all pages
+    \pagestyle{empty}
+    \pagenumbering{gobble}
+
+    % Cover page with image
+    \begin{center}
+        \includegraphics[width=\textwidth, height=\textheight, keepaspectratio]{images/banjul-declaration.jpg}
+    \end{center}
+    \newpage
+
+    % Title page
+    \vspace*{2cm}
+    \begin{center}
+        {\fontsize{290}{292}\selectfont For The Gambia our\\homeland...}
+        
+    \end{center}
+
+    \vspace*{\fill}
+
+    \begin{flushright}
+        {\Large with love from Michael Postmann and Gitti Sanji Sanyang}
+    \end{flushright}
+    \newpage
+
+    \begin{multicols}{{ '{' }}2{{ '}' }}
+        \tableofcontents
+    \end{multicols}
+    \newpage
+
+    \section*{Germination Methods}
+
+    \begin{description}
+
+    \item[Direct Sow]
+    Plant the seeds directly into the garden soil at the depth indicated on the seed packet, then cover gently with soil. This avoids root disturbance.
+
+    \item[Cold Stratification]
+    Place seeds in a moist medium (such as a damp paper towel), seal them in a plastic bag, and keep them in the refrigerator for 3--8 weeks to simulate winter before planting.
+
+    Seeds like appricot, cherry, peach, plum, apple, pear, and some maples often require cold stratification to simulate natural winter conditions as otherwise they may not germinate.
+
+    \item[Simple Soak \& Sow]
+    Submerge seeds in a cup of lukewarm water for 12--24 hours. Once the seeds have swollen from absorbing water, remove them and plant immediately.
+
+    \item[Scarification]
+    Physically breach the hard outer shell of the seed to let water in. Gently nick the coat with a knife or sand it down with a file, taking care not to damage the seed's eye (hilum).
+
+    \end{description}
+
+    \section*{Legend}
+
+    \begin{tabular}{{ '{' }}cl{{ '}' }}
+        \includegraphics[width=1.3cm, height=1.3cm]{icons/vine.eps} & Vine \\
+        \includegraphics[width=1.3cm, height=1.3cm]{icons/bamboo.eps} & Bamboo \\
+        \includegraphics[width=1.3cm, height=1.3cm]{icons/shrub.eps} & Shrub \\
+        \includegraphics[width=1.3cm, height=1.3cm]{icons/tree.eps} & Tree \\
+        \includegraphics[width=1.3cm, height=1.3cm]{icons/cactus.eps} & Cactus \\
+        \includegraphics[width=1.3cm, height=1.3cm]{icons/fruit.eps} & Edible \\
+        \includegraphics[width=1.3cm, height=1.3cm]{icons/blossom.eps} & Beautiful flowers \\
+        \includegraphics[width=1.3cm, height=1.3cm]{icons/fragrant.eps} & Fragrant \\
+        \includegraphics[width=1.3cm, height=1.3cm]{icons/medicinal.eps} & Medicinal value \\
+        \includegraphics[width=1.3cm, height=1.3cm]{icons/wood.eps} & Valubable wood
+    \end{tabular}
+
+    \newpage
+
     {% for tree in trees %}
+
 
     \noindent
     \makebox[\textwidth][c]{{ '{' }}%
