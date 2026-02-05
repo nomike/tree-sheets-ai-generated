@@ -16,6 +16,7 @@
     \usepackage{multicol}
     \usepackage{tocloft}
     \usepackage{array}
+    \usepackage{enumitem}
 
     % Remove page numbers from TOC
     \cftpagenumbersoff{section}
@@ -38,7 +39,9 @@
     \vspace*{2cm}
     \begin{center}
         {\fontsize{60}{72}\selectfont For The Gambia\\[1.2cm]our homeland...}
-        
+
+        \vspace{3.5cm}
+        \includegraphics[width=0.55\textwidth, keepaspectratio]{images/gambia-flag.png}
     \end{center}
 
     \vspace*{\fill}
@@ -48,8 +51,13 @@
     \end{flushright}
     \newpage
 
+    \section*{Contents}
     \begin{multicols}{{ '{' }}2{{ '}' }}
-        \tableofcontents
+    \begin{description}[nosep, leftmargin=0pt]
+    {% for tree in trees %}
+    \item[] {{ tree['Name']|replace('&', '\\&')|replace('_', '\\_')|replace('%', '\\%')|replace('#', '\\#') }} \dotfill {{ tree['ID'] }}
+    {% endfor %}
+    \end{description}
     \end{multicols}
     \newpage
 
@@ -75,23 +83,31 @@
 
     \section*{Legend}
 
+    \begin{multicols}{{ '{' }}2{{ '}' }}
     \begin{tabular}{{ '{' }}c l{{ '}' }}
         \includegraphics[width=1.3cm, height=1.3cm, valign=c]{icons/vine.eps} & \adjustbox{valign=c}{Vine} \\
         \includegraphics[width=1.3cm, height=1.3cm, valign=c]{icons/bamboo.eps} & \adjustbox{valign=c}{Bamboo} \\
         \includegraphics[width=1.3cm, height=1.3cm, valign=c]{icons/shrub.eps} & \adjustbox{valign=c}{Shrub} \\
         \includegraphics[width=1.3cm, height=1.3cm, valign=c]{icons/tree.eps} & \adjustbox{valign=c}{Tree} \\
-        \includegraphics[width=1.3cm, height=1.3cm, valign=c]{icons/cactus.eps} & \adjustbox{valign=c}{Cactus} \\
+        \includegraphics[width=1.3cm, height=1.3cm, valign=c]{icons/cactus.eps} & \adjustbox{valign=c}{Cactus}
+    \end{tabular}
+
+    \columnbreak
+
+    \begin{tabular}{{ '{' }}c l{{ '}' }}
         \includegraphics[width=1.3cm, height=1.3cm, valign=c]{icons/fruit.eps} & \adjustbox{valign=c}{Edible} \\
         \includegraphics[width=1.3cm, height=1.3cm, valign=c]{icons/blossom.eps} & \adjustbox{valign=c}{Beautiful flowers} \\
         \includegraphics[width=1.3cm, height=1.3cm, valign=c]{icons/fragrant.eps} & \adjustbox{valign=c}{Fragrant} \\
         \includegraphics[width=1.3cm, height=1.3cm, valign=c]{icons/medicinal.eps} & \adjustbox{valign=c}{Medicinal value} \\
         \includegraphics[width=1.3cm, height=1.3cm, valign=c]{icons/wood.eps} & \adjustbox{valign=c}{Valubable wood}
     \end{tabular}
+    \end{multicols}
 
     \newpage
 
     {% for tree in trees %}
 
+    \label{tree-{{ tree['ID'] }}}
     \addcontentsline{toc}{section}{ {{ tree['ID'] }} {{ tree['Name']|replace('&', '\\&')|replace('_', '\\_')|replace('%', '\\%')|replace('#', '\\#') }} }
 
     \noindent
@@ -156,5 +172,15 @@
     \newpage
 
     {% endfor %}
+
+    \newpage
+    \section*{Alphabetical index}
+    \begin{multicols}{{ '{' }}2{{ '}' }}
+    \begin{description}[nosep, leftmargin=0pt]
+    {% for tree in trees_sorted %}
+    \item[] {{ tree['Name']|replace('&', '\\&')|replace('_', '\\_')|replace('%', '\\%')|replace('#', '\\#') }} \dotfill {{ tree['ID'] }}
+    {% endfor %}
+    \end{description}
+    \end{multicols}
 
     \end{document}
