@@ -1,5 +1,6 @@
     \documentclass[a4paper]{article}
     \usepackage[utf8]{inputenc}
+    \usepackage[export]{adjustbox}
     \usepackage{graphicx}
     \usepackage{geometry}
     \usepackage{float}
@@ -10,12 +11,16 @@
         margin=1in,
     }
 
+    \usepackage{anyfontsize}
     \usepackage{tikz}
     \usepackage{multicol}
     \usepackage{tocloft}
+    \usepackage{array}
 
     % Remove page numbers from TOC
     \cftpagenumbersoff{section}
+    % Hide section numbers in body (sections still appear in TOC)
+    \setcounter{secnumdepth}{0}
 
     \begin{document}
 
@@ -32,7 +37,7 @@
     % Title page
     \vspace*{2cm}
     \begin{center}
-        {\fontsize{290}{292}\selectfont For The Gambia our\\homeland...}
+        {\fontsize{60}{72}\selectfont For The Gambia\\[1.2cm]our homeland...}
         
     \end{center}
 
@@ -70,23 +75,24 @@
 
     \section*{Legend}
 
-    \begin{tabular}{{ '{' }}cl{{ '}' }}
-        \includegraphics[width=1.3cm, height=1.3cm]{icons/vine.eps} & Vine \\
-        \includegraphics[width=1.3cm, height=1.3cm]{icons/bamboo.eps} & Bamboo \\
-        \includegraphics[width=1.3cm, height=1.3cm]{icons/shrub.eps} & Shrub \\
-        \includegraphics[width=1.3cm, height=1.3cm]{icons/tree.eps} & Tree \\
-        \includegraphics[width=1.3cm, height=1.3cm]{icons/cactus.eps} & Cactus \\
-        \includegraphics[width=1.3cm, height=1.3cm]{icons/fruit.eps} & Edible \\
-        \includegraphics[width=1.3cm, height=1.3cm]{icons/blossom.eps} & Beautiful flowers \\
-        \includegraphics[width=1.3cm, height=1.3cm]{icons/fragrant.eps} & Fragrant \\
-        \includegraphics[width=1.3cm, height=1.3cm]{icons/medicinal.eps} & Medicinal value \\
-        \includegraphics[width=1.3cm, height=1.3cm]{icons/wood.eps} & Valubable wood
+    \begin{tabular}{{ '{' }}c l{{ '}' }}
+        \includegraphics[width=1.3cm, height=1.3cm, valign=c]{icons/vine.eps} & \adjustbox{valign=c}{Vine} \\
+        \includegraphics[width=1.3cm, height=1.3cm, valign=c]{icons/bamboo.eps} & \adjustbox{valign=c}{Bamboo} \\
+        \includegraphics[width=1.3cm, height=1.3cm, valign=c]{icons/shrub.eps} & \adjustbox{valign=c}{Shrub} \\
+        \includegraphics[width=1.3cm, height=1.3cm, valign=c]{icons/tree.eps} & \adjustbox{valign=c}{Tree} \\
+        \includegraphics[width=1.3cm, height=1.3cm, valign=c]{icons/cactus.eps} & \adjustbox{valign=c}{Cactus} \\
+        \includegraphics[width=1.3cm, height=1.3cm, valign=c]{icons/fruit.eps} & \adjustbox{valign=c}{Edible} \\
+        \includegraphics[width=1.3cm, height=1.3cm, valign=c]{icons/blossom.eps} & \adjustbox{valign=c}{Beautiful flowers} \\
+        \includegraphics[width=1.3cm, height=1.3cm, valign=c]{icons/fragrant.eps} & \adjustbox{valign=c}{Fragrant} \\
+        \includegraphics[width=1.3cm, height=1.3cm, valign=c]{icons/medicinal.eps} & \adjustbox{valign=c}{Medicinal value} \\
+        \includegraphics[width=1.3cm, height=1.3cm, valign=c]{icons/wood.eps} & \adjustbox{valign=c}{Valubable wood}
     \end{tabular}
 
     \newpage
 
     {% for tree in trees %}
 
+    \addcontentsline{toc}{section}{ {{ tree['ID'] }} {{ tree['Name']|replace('&', '\\&')|replace('_', '\\_')|replace('%', '\\%')|replace('#', '\\#') }} }
 
     \noindent
     \makebox[\textwidth][c]{{ '{' }}%
