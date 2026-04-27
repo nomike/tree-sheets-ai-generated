@@ -12,6 +12,15 @@ if __name__ == '__main__':
             trees.append(row)
 
     trees_sorted = sorted(trees, key=lambda t: t.get('Name', '').lower())
+    trees_sorted_botanical = sorted(
+        trees, key=lambda t: t.get('Botanical name', '').lower()
+    )
     template = jinja2.Template(open(os.path.join('design', 'latex', 'design.latex.j2')).read())
     with open(os.path.join('design', 'latex', 'design.latex'), 'w') as f:
-        f.write(template.render(trees=trees, trees_sorted=trees_sorted))
+        f.write(
+            template.render(
+                trees=trees,
+                trees_sorted=trees_sorted,
+                trees_sorted_botanical=trees_sorted_botanical,
+            )
+        )

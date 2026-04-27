@@ -183,4 +183,14 @@
     \end{description}
     \end{multicols}
 
+    \newpage
+    \section*{Index by botanical name}
+    \begin{multicols}{{ '{' }}2{{ '}' }}
+    \begin{description}[nosep, leftmargin=0pt]
+    {% for tree in trees_sorted_botanical %}
+    \item[] {{ tree['Botanical name']|replace('&', '\\&')|replace('_', '\\_')|replace('%', '\\%')|replace('#', '\\#') }} \dotfill {{ tree['ID'] }}
+    {% endfor %}
+    \end{description}
+    \end{multicols}
+
     \end{document}
